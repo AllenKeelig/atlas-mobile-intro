@@ -3,7 +3,7 @@ import { createContext, useContext } from "react";
 
 const ActivitiesContext = createContext<ReturnType<typeof useActivities>>({
   activities: [],
-  getActivities: () => {},
+  getActivities: () => [],
   insertActivity: () => {}
 });
 

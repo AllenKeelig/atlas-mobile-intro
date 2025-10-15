@@ -1,16 +1,25 @@
-import { useActivities } from "@/hooks/useActivities";
-import { Link, router } from "expo-router";
-import { Text, View, StyleSheet, Pressable } from "react-native";
+import { useActivitiesContext } from "@/components/ActivitiesProvider";
+import { Link } from "expo-router";
+import { Text, View, StyleSheet } from "react-native";
+import { FlashList } from "@shopify/flash-list";
 
 export default function Index() {
-  const {activities} = useActivities();
+  const { activities } = useActivitiesContext();
+
   return (
     <View style={styles.container}>
-      {activities.map((activity) => (
-        <Text key={activity.id}>
-          {activity.steps} steps on {new Date(activity.date).toLocaleDateString()}
-        </Text>
-      ))}
+      <FlashList
+        data={activities}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <Text>
+            {item.steps} steps on {new Date(item.date).toLocaleDateString()}
+          </Text>
+        )}
+        ListEmptyComponent={
+          <Text style={{ marginTop: 20 }}>No activities yet.</Text>
+        }
+      />
       <Link style={styles.button} href={"/add-activity-screen"} replace>
         <Text style={styles.buttonText}>Add Activity</Text>
       </Link>
@@ -21,20 +30,18 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  heading: {
-    fontSize: 24,
+    padding: 16,
   },
   button: {
     backgroundColor: "#1ED2AF",
-    color: "white",
     padding: 16,
     width: "100%",
-    textAlign: "center",
+    marginTop: 20,
+    alignItems: "center",
+    marginBottom: 40,
   },
   buttonText: {
     color: "white",
-  }
-})
+    fontWeight: "bold",
+  },
+});
