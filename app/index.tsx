@@ -1,10 +1,11 @@
 import { useActivitiesContext } from "@/components/ActivitiesProvider";
 import { Link } from "expo-router";
-import { Text, View, StyleSheet, Pressable } from "react-native";
+import { View, StyleSheet, Pressable, Text } from "react-native";
 import { FlashList } from "@shopify/flash-list";
+import SwipeableActivity from "@/components/swipeableActivity";
 
 export default function Index() {
-  const { activities, deleteAllActivities } = useActivitiesContext();
+  const { activities, deleteAllActivities, deleteActivity } = useActivitiesContext();
 
   return (
     <View style={styles.container}>
@@ -12,13 +13,13 @@ export default function Index() {
         data={activities}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <Text>
-            {item.steps} steps on {new Date(item.date).toLocaleDateString()}
-          </Text>
+          <SwipeableActivity
+            id={item.id}
+            steps={item.steps}
+            date={item.date}
+            onDelete={deleteActivity}
+          />
         )}
-        ListEmptyComponent={
-          <Text style={{ marginTop: 20 }}>No activities yet.</Text>
-        }
       />
 
       <Link style={styles.button} href={"/add-activity-screen"} replace>
@@ -34,7 +35,6 @@ export default function Index() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 30,
     flex: 1,
     padding: 16,
   },
@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     backgroundColor: "#D9534F",
-    marginBottom: 60,
   },
   buttonText: {
     color: "white",
