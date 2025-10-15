@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, Text, View, Pressable, Dimensions } from "react-native";
 import Activity from "./Activity";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 
@@ -11,15 +11,15 @@ type SwipeableActivityProps = {
 
 export default function SwipeableActivity({ steps, date, id, onDelete }: SwipeableActivityProps) {
   const ActionButton = () => (
-    <Pressable style={styles.actionView} onPress={() => onDelete(id)}>
+    <Pressable style={styles.actionButton} onPress={() => onDelete(id)}>
       <Text style={styles.actionText}>Delete</Text>
     </Pressable>
   );
 
   return (
     <Swipeable
-      renderLeftActions={ActionButton}
       renderRightActions={ActionButton}
+      overshootRight={false} // prevent swipe from stretching beyond button
     >
       <View style={styles.container}>
         <Activity steps={steps} date={date} />
@@ -31,13 +31,14 @@ export default function SwipeableActivity({ steps, date, id, onDelete }: Swipeab
 const styles = StyleSheet.create({
   container: {
     marginVertical: 8,
+    overflow: "hidden", // ensures the swipeable doesn't overflow
   },
-  actionView: {
+  actionButton: {
     backgroundColor: "red",
     justifyContent: "center",
     alignItems: "center",
-    width: 80,
-    marginVertical: 8,
+    width: 80, 
+    height: "100%",
     borderRadius: 8,
   },
   actionText: {

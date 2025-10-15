@@ -19,10 +19,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     borderColor: "black",
-    borderWidth: 1,
+    borderWidth: 3,
     padding: 16,
-    marginVertical: 8, // spacing between items
-    borderRadius: 8,
+    marginVertical: 8,
+    marginHorizontal: 16,
   },
   text: {
     color: "black",

@@ -10,6 +10,7 @@ export default function AddActivityScreen() {
     <View style={styles.container}>
       <Text>AddActivityScreen</Text>
       <TextInput 
+        style={styles.input}
         placeholder='Enter steps' 
         keyboardType='number-pad' 
         onChangeText={(value) => setSteps(parseInt(value))}
@@ -31,20 +32,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "#FEF9E6",
+  },
+  input: {
+    backgroundColor: "white",
+    borderColor: "black",
+    borderWidth: 3,
+    padding: 16,
+    marginBottom: 24,
+    width: "100%",
+    fontSize: 16,
+    color: "black",
+    marginHorizontal: 20,
   },
   addButton: {
     backgroundColor: "#1ed2b4ff",
     color: "white",
-    padding: 16,
+    paddingVertical: 20,
     width: "100%",
     textAlign: "center",
-    marginBottom: 16
   },
   button: {
     backgroundColor: "#d21e1eff",
     color: "white",
-    padding: 16,
+    paddingVertical: 20,
     width: "100%",
     textAlign: "center",
   },

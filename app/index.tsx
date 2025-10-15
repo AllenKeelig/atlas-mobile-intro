@@ -36,18 +36,19 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    backgroundColor: "#FEF9E6",
   },
   button: {
     backgroundColor: "#1ED2AF",
-    padding: 16,
-    width: "100%",
-    marginTop: 20,
+    paddingVertical: 20, // taller buttons
+    width: "100%",       // touch sides of screen
     alignItems: "center",
-    borderRadius: 8,
+    borderRadius: 0,     // remove rounding so buttons touch each other
   },
   deleteButton: {
     backgroundColor: "#D9534F",
+    marginTop: 0, // remove spacing between buttons
+    marginBottom: 20,
   },
   buttonText: {
     color: "white",
